@@ -3,7 +3,8 @@
 /* HERO */
 .hero-home{
   position: relative;
-  min-height: 100vh;
+  min-height: 100vh; /* fallback */
+  min-height: 100dvh; /* desconta a barra do navegador no mobile */
   display: flex;
   align-items: center;
   padding-top: 90px; /* compensa header fixo */
@@ -121,7 +122,8 @@
 .textHome{
     margin-top: .75rem;
   opacity: .8;
-  font-size: 25px;
+  /* Escala entre ~17px (mobile) e 25px (desktop) */
+  font-size: clamp(1.05rem, 1.2rem + 0.6vw, 1.5625rem);
   margin-bottom: .99rem;
 }
 .section.light{
@@ -186,6 +188,13 @@
   font-weight: 600;
 }
 
+
+/* Container da seção de contato (mesmo comportamento do .container) */
+.container-contato{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
 
 .contato-hero-grid {
   display: grid;
@@ -288,10 +297,15 @@ a{
 /* Responsivo */
 @media (max-width: 900px) {
   .contato-hero-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 1.5rem;
   }
-  
+
+  /* Permite que os itens da grid encolham abaixo do seu min-content (evita overflow) */
+  .contato-hero-grid > * {
+    min-width: 0;
+  }
+
   .form-hero {
     align-items: stretch;
   }

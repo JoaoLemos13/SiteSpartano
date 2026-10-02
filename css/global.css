@@ -34,12 +34,18 @@
 }
 
 html { scroll-behavior: smooth; }
+
+/* Compensa o header fixo ao navegar por âncoras (#quemSomosNos, #contato, etc.) */
+section[id]{ scroll-margin-top: 80px; }
 body{
   font-family: var(--font-family);
   line-height: 1.6;
   color: var(--gray-900);
   background: var(--white);
   overflow-x: hidden;
+  /* Quebra palavras/tokens longos (e-mails, URLs) para não estourar a largura no mobile */
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .container{

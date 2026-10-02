@@ -57,9 +57,17 @@
 /* GRID DE CARDS */
 .grid{
   margin-top: 1rem;
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* centraliza linhas completas E a última linha incompleta */
   gap: 1rem;
+}
+
+/* Cada card tem largura-base flexível e um teto, mantendo ~4 por linha no desktop
+   e descendo para 3/2/1 automaticamente conforme a tela encolhe */
+.grid > .product-card{
+  flex: 0 1 278px; /* todos os cards com a mesma largura; mantém 4 por linha no desktop */
+  max-width: 278px;
 }
 .product-media {
   display: flex !important;
@@ -373,22 +381,11 @@
 }
 
 /* RESPONSIVO */
-@media (max-width: 1100px){
-  .grid{ grid-template-columns: repeat(3, minmax(0, 1fr));
-justify-content: center; }
-}
-
-@media (max-width: 900px){
-  .grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-
 @media (max-width: 520px){
-  .grid{ grid-template-columns: 1fr;
-  grid-template-columns: minmax(0, 360px); /* largura máxima do card no mobile */
-    justify-content: center; }
+  /* Mobile: card ocupa toda a largura disponível, centralizado */
+  .grid > .product-card{ flex-basis: 100%; max-width: 360px; }
   .hero-actions .btn{ width: 100%; }
   .catalog-cta .btn{ width: 100%; }
-
 }
 
 
